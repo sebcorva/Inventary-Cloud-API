@@ -15,7 +15,7 @@ RESTful API de alto rendimiento para la gestión de inventario, catálogo de pro
 
 El backend sigue un patrón de diseño en capas para garantizar separación de responsabilidades, testabilidad y mantenibilidad:
 
-´´´text
+```text
 inventory-cloud-api/
 ├── app/
 │   ├── config.py       # Configuración central y validación de variables con Pydantic
@@ -29,3 +29,4 @@ inventory-cloud-api/
 ├── requirements.txt    # Dependencias fijadas para entornos reproducibles
 ├── .env.example        # Plantilla pública de variables de entorno
 └── README.md           # Documentación técnica del proyecto
+```
