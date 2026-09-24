@@ -1,11 +1,37 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from app.config import settings
+from app.database import Base, engine
+import app.models
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    #Al iniciar crea las tablas si no existen
+    Base.metadata.create_all(bind=engine)
+    yield
+    #Al apagar limpia recursos
 
 app = FastAPI(
     title = settings.PROJECT_NAME,
     version = "1.0.0",
     docs_url = "/docs",
     redoc_url = "/redoc",
+    lifespan = lifespan,
+)
+
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/health", tags=["System"])
