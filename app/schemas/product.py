@@ -3,7 +3,7 @@ from decimal import Decimal
 from pydantic import BaseModel, ConfigDict, Field
 
 class ProductBase(BaseModel):
-    title: str = Field(..., max_length=1, max_length=150)
+    title: str = Field(..., min_length=1, max_length=150)
     description: str | None = None
     price: Decimal = Field(..., gt=0, decimal_places=2)
     stock: int = Field(default=0, ge=0)
@@ -17,7 +17,7 @@ class ProductUpdate(BaseModel):
     price: Decimal | None = Field(None, gt=0, decimal_places=2)
     stock: int | None = Field(None, ge=0)
 
-class ProductResponde(ProductBase):
+class ProductResponse(ProductBase):
     id: int
     image_url: str | None = None
     owner_id: int

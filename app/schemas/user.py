@@ -1,4 +1,4 @@
-from datatime import datetime
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 # Base compartida

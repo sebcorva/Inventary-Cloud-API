@@ -5,6 +5,7 @@ from app.schemas.product import (
     ProductUpdate,
 )
 
+from app.schemas.token import Token, TokenData
 from app.schemas.user import UserBase, UserCreate, UserResponse
 
 __all__ = [
@@ -15,4 +16,6 @@ __all__ = [
     "ProductCreate",
     "ProductUpdate",
     "ProductResponse",
+    "Token",
+    "TokenData",
 ]
