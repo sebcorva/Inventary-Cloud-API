@@ -9,10 +9,9 @@ import app.models
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    #Al iniciar crea las tablas si no existen
-    Base.metadata.create_all(bind=engine)
+    # Startup: Las tablas y el esquema son gestionados profesionalmente con Alembic
     yield
-    #Al apagar limpia recursos
+    # Shutdown: Limpieza de recursos si fuera necesario
 
 app = FastAPI(
     title = settings.PROJECT_NAME,
