@@ -33,7 +33,7 @@ def get_current_user(
     except InvalidTokenError:
         raise credentials_exception
 
-    user = db.query(User).filter(Use.email == token_data.email).first()
+    user = db.query(User).filter(User.email == token_data.email).first()
     if user is None:
         raise credentials_exception
     if not user.is_active:
