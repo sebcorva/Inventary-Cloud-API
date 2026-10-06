@@ -9,7 +9,7 @@ import app.models
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Las tablas y el esquema son gestionados profesionalmente con Alembic
+    # Startup: Las tablas y el esquema son gestionados con Alembic
     yield
     # Shutdown: Limpieza de recursos si fuera necesario
 
