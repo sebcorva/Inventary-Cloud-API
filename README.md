@@ -30,3 +30,7 @@ inventory-cloud-api/
 ├── .env.example        # Plantilla pública de variables de entorno
 └── README.md           # Documentación técnica del proyecto
 ```
+
+## Guía Rápida de Inicio
+
+Para instrucciones paso a paso sobre cómo levantar el entorno con Docker, configurar credenciales de AWS S3 y probar el CRUD completo en Swagger UI, consulta la [Guía de Ejecución Local (LOCAL_SETUP.md)](LOCAL_SETUP.md).

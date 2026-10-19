@@ -14,7 +14,7 @@ class S3Service:
     def __init__(self):
         session_kwargs = {"region_name": settings.AWS_REGION}
         
-        # Si se definieron credenciales explícitas (desarrollo local), las usamos
+        # Si se definieron credenciales explícitas, las usamos
         if settings.AWS_ACCESS_KEY_ID and settings.AWS_SECRET_ACCESS_KEY:
             session_kwargs["aws_access_key_id"] = settings.AWS_ACCESS_KEY_ID
             session_kwargs["aws_secret_access_key"] = settings.AWS_SECRET_ACCESS_KEY
