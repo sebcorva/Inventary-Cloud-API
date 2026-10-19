@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENVIRONMENT: test
-      SECRET_KEY: test-secret-key-for-github-actions-ci-pipeline
-      ALGORITHM: HS256
-      ACCESS_TOKEN_EXPIRE_MINUTES: 60
-      DATABASE_URL: sqlite:///:memory:
-      AWS_REGION: us-east-1
-      S3_BUCKET_NAME: test-bucket
-      SQS_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/123456789012/test-queue
+      ENVIRONMENT: "test"
+      SECRET_KEY: "test-secret-key-for-github-actions-ci-pipeline"
+      ALGORITHM: "HS256"
+      ACCESS_TOKEN_EXPIRE_MINUTES: "60"
+      DATABASE_URL: "sqlite:///:memory:"
+      AWS_REGION: "us-east-1"
+      S3_BUCKET_NAME: "test-bucket"
+      SQS_QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/123456789012/test-queue"
 
     steps:
       - name: Checkout repository
