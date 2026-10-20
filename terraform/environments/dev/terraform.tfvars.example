@@ -1,0 +1,20 @@
+# ==============================================================================
+# Variables de Ejemplo para Entorno de Desarrollo (dev)
+# Copia este archivo a 'terraform.tfvars' y completa con tus valores reales
+# ==============================================================================
+
+project_name = "inventory-cloud"
+environment  = "dev"
+aws_region   = "us-east-1"
+vpc_cidr     = "10.0.0.0/16"
+
+# Base de Datos PostgreSQL
+database_name     = "inventory_db"
+database_username = "postgresadmin"
+database_password = "TuPasswordSeguroRDS2026!"
+
+# Seguridad JWT
+secret_key = "tu_clave_secreta_jwt_de_256_bits_aqui"
+
+# Imagen Docker en Amazon ECR (Opcional, por defecto usa imagen base)
+# container_image = "123456789012.dkr.ecr.us-east-1.amazonaws.com/inventory-cloud-api:latest"
