@@ -1,6 +1,8 @@
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+import time
+import uuid
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 # Logging global 
@@ -41,6 +43,29 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def add_correlation_id_and_timing(request: Request, call_next):
+    """
+    Middleware de observabilidad:
+    - Extrae o genera un Correlation ID (X-Request-ID) único por petición.
+    - Mide la latencia de procesamiento.
+    - Inyecta los headers en la respuesta y emite logs estructurados para CloudWatch.
+    """
+    correlation_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+    start_time = time.perf_counter()
+
+    response = await call_next(request)
+
+    process_time = time.perf_counter() - start_time
+    response.headers["X-Request-ID"] = correlation_id
+    response.headers["X-Process-Time"] = f"{process_time:.4f}s"
+
+    logger.info(
+        f"[{correlation_id}] {request.method} {request.url.path} "
+        f"- Status: {response.status_code} - Duration: {process_time * 1000:.2f}ms"
+    )
+    return response
 
 #Conectar rutas de autenticacion (/auth/register, /auth/login)
 app.include_router(auth.router)

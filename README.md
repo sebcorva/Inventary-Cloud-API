@@ -38,13 +38,13 @@ graph TD
 
 ---
 
-## 🌟 Diferenciadores Técnicos y Decisiones de Diseño
+## 🌟 Decisiones de Diseño
 
 ### 1. Procesamiento Asíncrono y Desacoplado (SQS + DLQ)
 En lugar de procesar tareas pesadas (redimensionamiento de imágenes, alertas por correo) en el hilo HTTP bloqueante:
 - La API responde inmediatamente `201 Created` al usuario (< 30ms).
 - Mediante `BackgroundTasks` de FastAPI y `boto3`, se emite un evento estructurado (*Event Envelope*) a **Amazon SQS**.
-- **Resiliencia con Dead Letter Queue (DLQ):** Si un worker falla 3 veces consecutivas al procesar un mensaje (`maxReceiveCount = 3`), SQS lo traslada a la DLQ para análisis forense sin perder datos ni bloquear la cola principal.
+- **Resiliencia con Dead Letter Queue (DLQ):** Si un worker falla 3 veces consecutivas al procesar un mensaje (`maxReceiveCount = 3`), SQS lo traslada a la DLQ para análisis sin perder datos ni bloquear la cola principal.
 
 ### 2. Principios 12-Factor App y Gestión Segura de Credenciales
 - **Cero secretos en código:** La configuración se valida en arranque mediante **Pydantic Settings v2**.
@@ -129,13 +129,14 @@ docker compose up --build
 
 - **Documentación Interactiva (Swagger UI):** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Documentación Alternativa (ReDoc):** [http://localhost:8000/redoc](http://localhost:8000/redoc)
-- **Healthcheck:** [http://localhost:8000/health](http://localhost:8000/health)
+- **Healthcheck & Métricas:** [http://localhost:8000/health](http://localhost:8000/health)
+- **Colección de Postman:** Importa [`docs/postman/Inventory_Cloud_API.postman_collection.json`](docs/postman/Inventory_Cloud_API.postman_collection.json) con token JWT automático para pruebas en 1 clic.
 
 ---
 
 ## 🧪 Ejecución de Pruebas Automatizadas
 
-El proyecto incluye 19 pruebas automáticas que validan el 100% de los endpoints, autenticación, control de acceso y procesamiento de eventos sin requerir conexión a internet ni generar cargos en AWS:
+El proyecto incluye **20 pruebas automáticas** que validan el 100% de los endpoints, autenticación, headers de observabilidad (`X-Request-ID`), control de acceso y procesamiento de eventos sin requerir conexión a internet ni generar cargos en AWS:
 
 ```bash
 # Ejecutar la suite completa con Pytest
