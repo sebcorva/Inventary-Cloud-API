@@ -65,3 +65,7 @@ override.tf.json
 
 # Permitir explícitamente los archivos de ejemplo en git
 !*.tfvars.example
+
+# Guías de estudio personales (locales)
+learning_guide/
+study_guide/
